@@ -45,7 +45,7 @@ const VerifyOTP = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/verify-otp", { email, otp: otp.join('') });
+      const res = await axios.post("https://backend-server-tm1l.onrender.com/api/auth/verify-otp", { email, otp: otp.join('') });
 
       if (res.data?.token) {
         localStorage.removeItem("pendingSignup");
@@ -69,7 +69,7 @@ const VerifyOTP = () => {
   const handleResendOTP = async () => {
     setResending(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/resend-otp", { email });
+      const res = await axios.post("https://backend-server-tm1l.onrender.com/api/auth/resend-otp", { email });
       toast.success(res.data?.msg || "OTP resent.");
     } catch (err) {
       toast.error(err.response?.data?.msg || "Failed to resend OTP.");

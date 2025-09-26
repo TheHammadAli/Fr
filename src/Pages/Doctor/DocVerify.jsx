@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import AppContext from "../../Context/AppContext";
 
-const BASE_URL = "http://localhost:5000/api/doctors";
+const BASE_URL = "https://backend-server-tm1l.onrender.com/api/doctors";
 
 const DocVerify = () => {
   const navigate = useNavigate();

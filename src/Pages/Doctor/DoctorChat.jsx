@@ -36,7 +36,7 @@ const DoctorChat = () => {
 
         const fetchProfile = async () => {
           try {
-            const res = await fetch(`http://localhost:5000/api/chat/get-doctor/${authDoctorId}`);
+            const res = await fetch(`https://backend-server-tm1l.onrender.com/api/chat/get-doctor/${authDoctorId}`);
             const data = await res.json();
             if (data.success) {
               setDoctorId(data.doctor._id);

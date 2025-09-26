@@ -19,7 +19,7 @@ const PatientChatList = () => {
     const fetchDoctorsWithAppointments = async () => {
       if (!patientId) return;
       try {
-        const res = await fetch(`http://localhost:5000/api/appointments/chat-doctors/${patientId}`);
+        const res = await fetch(`https://backend-server-tm1l.onrender.com/api/appointments/chat-doctors/${patientId}`);
         const data = await res.json();
         if (data.success) {
           setDoctors(data.doctors);

@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
- const socket = io("http://localhost:5000", {
+ const socket = io("https://backend-server-tm1l.onrender.com", {
    withCredentials: true,
    reconnection: true,
    reconnectionAttempts: 5,

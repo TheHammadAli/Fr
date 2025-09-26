@@ -5,7 +5,7 @@ import axios from "axios";
 const ProfileContext = createContext();
 
 // ✅ Backend base URL (adjust as needed)
-const BASE_URL = "http://localhost:5000/api/doctor-profile";
+const BASE_URL = "https://backend-server-tm1l.onrender.com/api/doctor-profile";
 
 export const ProfileProvider = ({ children }) => {
   const [profiles, setProfiles] = useState([]);
