@@ -30,15 +30,25 @@ const DoctorSignup = () => {
   const [passwordStrength, setPasswordStrength] = useState("");
   const [errors, setErrors] = useState({});
 
-  // Relaxed validation to align with common backend requirements
+  // Email validation
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const validateUsername = (username) => /^[A-Za-z\s]+$/.test(username.trim());
 
+  // Username validation: only letters + spaces, at least 1 char
+  const validateUsername = (username) =>
+    /^[A-Za-z\s]+$/.test(username.trim());
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    let value = e.target.value;
+
+    // Clean username: trim + collapse multiple spaces
+    if (e.target.name === "username") {
+      value = value.replace(/\s+/g, " ");
+    }
+
+    setFormData({ ...formData, [e.target.name]: value });
+
     if (e.target.name === "password") {
-      const strength = checkPasswordStrength(e.target.value);
+      const strength = checkPasswordStrength(value);
       setPasswordStrength(strength);
     }
   };
@@ -46,7 +56,12 @@ const DoctorSignup = () => {
   const checkPasswordStrength = (password) => {
     if (!password) return "";
     if (password.length < 6) return "Weak";
-    if (password.match(/[A-Z]/) && password.match(/[0-9]/) && password.length >= 8) return "Strong";
+    if (
+      password.match(/[A-Z]/) &&
+      password.match(/[0-9]/) &&
+      password.length >= 8
+    )
+      return "Strong";
     return "Medium";
   };
 
@@ -56,7 +71,8 @@ const DoctorSignup = () => {
     const newErrors = {};
 
     if (!formData.username || !validateUsername(formData.username)) {
-      newErrors.username = "Username must be at least 3 characters (letters, numbers, underscores).";
+      newErrors.username =
+        "Username can only contain letters and spaces.";
     }
 
     if (!formData.email || !validateEmail(formData.email)) {
@@ -77,10 +93,10 @@ const DoctorSignup = () => {
     }
 
     const signupData = {
-      username: formData.username,
+      username: formData.username.trim(),
       email: formData.email.trim().toLowerCase(),
       password: formData.password,
-      specialization: "general", // Adjust if backend requires specific values
+      specialization: "general",
     };
 
     console.log("📤 Doctor Signup Data:", signupData);
@@ -88,7 +104,10 @@ const DoctorSignup = () => {
 
     if (result?.success) {
       toast.success("Signup successful! OTP sent to your email.");
-      localStorage.setItem("pendingDoctorSignup", JSON.stringify(signupData));
+      localStorage.setItem(
+        "pendingDoctorSignup",
+        JSON.stringify(signupData)
+      );
       navigate("/docverify-otp");
     } else {
       console.error("Signup Result Error:", result.error);
@@ -122,14 +141,18 @@ const DoctorSignup = () => {
 
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">Join as Doctor</h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">
+            Join as Doctor
+          </h2>
           <p className="text-gray-600">Create your professional account</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Username */}
           <div className="relative group">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Username</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Username
+            </label>
             <div className="relative">
               <FontAwesomeIcon
                 icon={faUser}
@@ -138,7 +161,7 @@ const DoctorSignup = () => {
               <input
                 type="text"
                 name="username"
-                placeholder="Choose a professional username"
+                placeholder="Enter your full name"
                 value={formData.username}
                 onChange={handleChange}
                 onFocus={() => setFocusedField("username")}
@@ -159,14 +182,17 @@ const DoctorSignup = () => {
             </div>
             {errors.username && (
               <p className="text-red-500 text-sm mt-2 flex items-center">
-                <span className="mr-1">⚠️</span>{errors.username}
+                <span className="mr-1">⚠️</span>
+                {errors.username}
               </p>
             )}
           </div>
 
           {/* Email */}
           <div className="relative group">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Email Address
+            </label>
             <div className="relative">
               <FontAwesomeIcon
                 icon={faEnvelope}
@@ -196,14 +222,17 @@ const DoctorSignup = () => {
             </div>
             {errors.email && (
               <p className="text-red-500 text-sm mt-2 flex items-center">
-                <span className="mr-1">⚠️</span>{errors.email}
+                <span className="mr-1">⚠️</span>
+                {errors.email}
               </p>
             )}
           </div>
 
           {/* Password */}
           <div className="relative group">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Password
+            </label>
             <div className="relative">
               <FontAwesomeIcon
                 icon={faLock}
@@ -263,14 +292,17 @@ const DoctorSignup = () => {
             )}
             {errors.password && (
               <p className="text-red-500 text-sm mt-2 flex items-center">
-                <span className="mr-1">⚠️</span>{errors.password}
+                <span className="mr-1">⚠️</span>
+                {errors.password}
               </p>
             )}
           </div>
 
           {/* Confirm Password */}
           <div className="relative group">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Confirm Password
+            </label>
             <div className="relative">
               <FontAwesomeIcon
                 icon={faLock}
@@ -294,14 +326,19 @@ const DoctorSignup = () => {
               <button
                 type="button"
                 className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-500 transition-colors"
-                onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+                onClick={() =>
+                  setConfirmPasswordVisible(!confirmPasswordVisible)
+                }
               >
-                <FontAwesomeIcon icon={confirmPasswordVisible ? faEyeSlash : faEye} />
+                <FontAwesomeIcon
+                  icon={confirmPasswordVisible ? faEyeSlash : faEye}
+                />
               </button>
             </div>
             {errors.confirmPassword && (
               <p className="text-red-500 text-sm mt-2 flex items-center">
-                <span className="mr-1">⚠️</span>{errors.confirmPassword}
+                <span className="mr-1">⚠️</span>
+                {errors.confirmPassword}
               </p>
             )}
           </div>
@@ -316,8 +353,18 @@ const DoctorSignup = () => {
               <span>
                 Sign Up as Doctor
                 <span className="inline-block animate-bounce">.</span>
-                <span className="inline-block animate-bounce" style={{ animationDelay: '0.1s' }}>.</span>
-                <span className="inline-block animate-bounce" style={{ animationDelay: '0.2s' }}>.</span>
+                <span
+                  className="inline-block animate-bounce"
+                  style={{ animationDelay: "0.1s" }}
+                >
+                  .
+                </span>
+                <span
+                  className="inline-block animate-bounce"
+                  style={{ animationDelay: "0.2s" }}
+                >
+                  .
+                </span>
               </span>
             ) : (
               "Sign Up as Doctor"
