@@ -32,7 +32,8 @@ const DoctorSignup = () => {
 
   // Relaxed validation to align with common backend requirements
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const validateUsername = (username) => /^[a-zA-Z0-9_]{3,}$/.test(username);
+  const validateUsername = (username) => /^[A-Za-z\s]+$/.test(username.trim());
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
