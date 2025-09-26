@@ -131,6 +131,7 @@ const DoctorLogin = () => {
             {loading ? (
               <span>
                 Login
+                
                 <span className="inline-block animate-bounce">.</span>
                 <span className="inline-block animate-bounce" style={{ animationDelay: '0.1s' }}>.</span>
                 <span className="inline-block animate-bounce" style={{ animationDelay: '0.2s' }}>.</span>
