@@ -4,7 +4,7 @@ import { faEnvelope, faPen } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import AppContext from "../Context/AppContext";
-import Spinner from "../Components/Spinner";
+import Spinner from "../Components/spinner";
 
 const ForgetPassword = () => {
   const { forgotPassword, loading } = useContext(AppContext);

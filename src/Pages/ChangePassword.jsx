@@ -4,7 +4,7 @@ import { faLock, faPen } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import AppContext from "../Context/AppContext";
-import Spinner from "../Components/Spinner";
+import Spinner from "../Components/spinner";
 
 const ChangePassword = () => {
   const { changePassword, loading } = useContext(AppContext);
