@@ -352,6 +352,7 @@ const DoctorSignup = () => {
             {loading ? (
               <span>
                 Sign Up as Doctor
+                <span className="ml-2 flex"></span>
                 <span className="inline-block animate-bounce">.</span>
                 <span
                   className="inline-block animate-bounce"

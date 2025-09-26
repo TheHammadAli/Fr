@@ -139,6 +139,7 @@ const ChangePassword = () => {
             {loading ? (
               <span>
                 Change Password
+                <span className="ml-2 flex"></span>
                 <span className="inline-block animate-bounce">.</span>
                 <span className="inline-block animate-bounce" style={{ animationDelay: '0.1s' }}>.</span>
                 <span className="inline-block animate-bounce" style={{ animationDelay: '0.2s' }}>.</span>
