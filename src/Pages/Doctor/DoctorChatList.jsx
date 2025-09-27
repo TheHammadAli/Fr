@@ -31,7 +31,7 @@ const DoctorChatList = () => {
       try {
         setLoading(true);
         console.log("[DoctorChatList] Fetching doctor profile for ID:", doctorId);
-        const res = await fetch(`https://backend-server-tm1l.onrender.com/api/chat/get-doctor/${doctorId}`);
+        const res = await fetch(`https://backend-2-5vig.onrender.com/api/chat/get-doctor/${doctorId}`);
         const data = await res.json();
         console.log("[DoctorChatList] Doctor profile fetch response:", data);
         if (data.success) {

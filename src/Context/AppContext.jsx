@@ -5,8 +5,8 @@ import axios from "axios";
 const AppContext = createContext();
 
 // Backend URLs
-const BASE_URL = "https://backend-server-tm1l.onrender.com/api/auth";
-const BASE_URL1 = "https://backend-server-tm1l.onrender.com/api";
+const BASE_URL = "https://backend-2-5vig.onrender.com/api/auth";
+const BASE_URL1 = "https://backend-2-5vig.onrender.com/api";
 
 export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(null);

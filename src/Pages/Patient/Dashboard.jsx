@@ -26,7 +26,7 @@ const Dashboard = () => {
 useEffect(() => {
   const fetchTestimonials = async () => {
     try {
-      const res = await axios.get("https://backend-server-tm1l.onrender.com/api/testimonials");
+      const res = await axios.get("https://backend-2-5vig.onrender.com/api/testimonials");
       setTestimonials(res.data || []);
     } catch (err) {
       console.error("Failed to load testimonials:", err);
@@ -43,7 +43,7 @@ useEffect(() => {
   useEffect(() => {
     const fetchAnnouncement = async () => {
       try {
-        const res = await axios.get("https://backend-server-tm1l.onrender.com/api/announcement/latest");
+        const res = await axios.get("https://backend-2-5vig.onrender.com/api/announcement/latest");
         if (res.data?.message) {
           setAnnouncement(res.data.message);
           setTimeout(() => setAnnouncement(null), 3000);
@@ -95,7 +95,7 @@ useEffect(() => {
     }
 
     try {
-      const res = await fetch("https://backend-server-tm1l.onrender.com/api/newsletter/subscribe", {
+      const res = await fetch("https://backend-2-5vig.onrender.com/api/newsletter/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: subscriberEmail }),
@@ -113,7 +113,7 @@ useEffect(() => {
 
   const handleUnsubscribe = async () => {
     try {
-      const res = await fetch("https://backend-server-tm1l.onrender.com/api/newsletter/unsubscribe", {
+      const res = await fetch("https://backend-2-5vig.onrender.com/api/newsletter/unsubscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: subscriberEmail }),

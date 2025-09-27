@@ -3,7 +3,7 @@ import axios from "axios";
 
 const AppointmentContext = createContext();
 
-const BASE_URL = "https://backend-server-tm1l.onrender.com/api/appointments";
+const BASE_URL = "https://backend-2-5vig.onrender.com/api/appointments";
 
 export const AppointmentProvider = ({ children }) => {
   const [appointments, setAppointments] = useState([]);

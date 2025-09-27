@@ -12,7 +12,7 @@ export const BlogProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        "https://backend-server-tm1l.onrender.com/api/blogs/upload",
+        "https://backend-2-5vig.onrender.com/api/blogs/upload",
         formData,
         {
           headers: {
@@ -35,7 +35,7 @@ export const BlogProvider = ({ children }) => {
   // ✅ Fetch all blogs
   const fetchAllBlogs = async () => {
     try {
-      const res = await axios.get("https://backend-server-tm1l.onrender.com/api/blogs");
+      const res = await axios.get("https://backend-2-5vig.onrender.com/api/blogs");
       setBlogs(res.data.blogs);
     } catch (err) {
       toast.error("Failed to fetch blogs");

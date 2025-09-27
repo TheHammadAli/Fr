@@ -98,7 +98,7 @@ const DoctorChatWindow = () => {
     const fetchProfile = async () => {
       if (!doctorId) return;
       try {
-        const res = await fetch(`https://backend-server-tm1l.onrender.com/api/chat/get-doctor/${doctorId}`);
+        const res = await fetch(`https://backend-2-5vig.onrender.com/api/chat/get-doctor/${doctorId}`);
         const data = await res.json();
         if (data.success) {
           setProfileId(data.doctor._id);
@@ -114,7 +114,7 @@ const DoctorChatWindow = () => {
 
   const fetchMessages = async (docId) => {
     try {
-      const res = await fetch(`https://backend-server-tm1l.onrender.com/api/chat/history/${docId}/${patientId}`);
+      const res = await fetch(`https://backend-2-5vig.onrender.com/api/chat/history/${docId}/${patientId}`);
       const data = await res.json();
       if (data.success) {
         setMessages(data.messages);
@@ -277,7 +277,7 @@ const DoctorChatWindow = () => {
 
   const sendMessage = async (payload) => {
     try {
-      const res = await fetch("https://backend-server-tm1l.onrender.com/api/chat/send", {
+      const res = await fetch("https://backend-2-5vig.onrender.com/api/chat/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

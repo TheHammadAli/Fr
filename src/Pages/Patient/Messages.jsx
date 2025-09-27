@@ -102,7 +102,7 @@ useEffect(() => {
     const fetchDoctors = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`https://backend-z2yb.onrender.com/api/appointments/chat-doctors/${patientId}`);
+        const res = await fetch(`https://backend-2-5vig.onrender.com/api/appointments/chat-doctors/${patientId}`);
         const data = await res.json();
         if (data.success) setDoctors(data.doctors);
       } catch (err) {
@@ -422,7 +422,7 @@ useEffect(() => {
     };
 
     try {
-      const res = await fetch("https://backend-z2yb.onrender.com/api/chat/send", {
+      const res = await fetch("https://backend-2-5vig.onrender.com/api/chat/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -482,7 +482,7 @@ useEffect(() => {
       };
 
       try {
-        const res = await fetch("https://backend-z2yb.onrender.com/api/chat/send", {
+        const res = await fetch("https://backend-2-5vig.onrender.com/api/chat/send", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -514,7 +514,7 @@ useEffect(() => {
     formData.append("timestamp", new Date().toISOString());
 
     try {
-      const res = await fetch("https://backend-z2yb.onrender.com/api/chat/send-file", {
+      const res = await fetch("https://backend-2-5vig.onrender.com/api/chat/send-file", {
         method: "POST",
         body: formData,
       });
