@@ -13,7 +13,7 @@ export const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [testimonials, setTestimonials] = useState([]);
-  const [loadingUser, setLoadingUser] = useState(true);
+  const [loadingUser, setLoadingUser] = useState(false);
 
   // Log BASE_URL for debugging
   console.log("🔍 BASE_URL:", BASE_URL);

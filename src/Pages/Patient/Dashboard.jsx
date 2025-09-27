@@ -132,32 +132,53 @@ useEffect(() => {
   return (
     <div className="overflow-x-hidden">
       {announcement && showBanner && (
-        <div className="max-w-6xl mx-auto my-8 px-6">
-          <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 text-white rounded-2xl shadow-2xl relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/10"></div>
-            <div className="relative flex items-center justify-between gap-6 p-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                  <span className="text-2xl">📢</span>
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 animate-slide-down">
+          <div className="max-w-lg">
+            <div className="bg-white border-l-4 border-blue-500 rounded-r-xl shadow-xl shadow-blue-500/10 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50"></div>
+              <div className="relative p-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-3 flex-1">
+                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md flex-shrink-0">
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent text-base">System Update</h3>
+                        <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></div>
+                      </div>
+                      <p className="text-gray-600 leading-relaxed text-sm">{announcement}</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setShowBanner(false);
+                      sessionStorage.setItem("announcementDismissed", "true");
+                    }}
+                    className="w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200 flex-shrink-0 group"
+                    aria-label="Dismiss"
+                  >
+                    <svg className="w-3 h-3 group-hover:rotate-90 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
                 </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-1">Important Announcement</h3>
-                  <p className="text-blue-100">{announcement}</p>
+                <div className="mt-3 flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Auto-dismiss in 3s</span>
+                  </div>
+                  <div className="w-16 h-0.5 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full animate-progress"></div>
+                  </div>
                 </div>
               </div>
-              <button
-                onClick={() => {
-                  setShowBanner(false);
-                  sessionStorage.setItem("announcementDismissed", "true");
-                }}
-                className="w-8 h-8 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
-                aria-label="Dismiss"
-              >
-                ×
-              </button>
+              <div className="absolute top-0 left-0 w-0.5 h-full bg-gradient-to-b from-blue-500 to-purple-600"></div>
             </div>
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-            <div className="absolute -bottom-10 -left-10 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
           </div>
         </div>
       )}

@@ -40,29 +40,14 @@ const App = () => {
   const { loadingUser } = useContext(AppContext);
   const [routeLoading, setRouteLoading] = useState(false);
 
-  // Only these routes show the spinner
+  // Only these routes show the spinner (authentication and critical routes)
   const spinnerRoutes = [
+    "/verify-otp",
+    "/docverify-otp",
     "/docDashboard",
     "/docDashboard/appointments",
     "/docDashboard/profile",
     "/docDashboard/messages",
-  
-    "/",
-    "/dashboard",
-    "/verify-otp",
-    "/docverify-otp",
-    "/contact",
-    "/faqs",
-    "/about",
-    "/testimonial",
-    "/doctors",
-    "/appointments",
-    "/messages",
-    "/messages/:docid", // Add dynamic route to spinnerRoutes
-    "/all-blogs",
-    "/blogs",
-    "/terms-of-service",
-    "/privacy-policy",
   ];
 
   const hideNavbarPaths = [
@@ -93,8 +78,10 @@ const App = () => {
     );
 
     if (match) {
+      // Only show loading for specific routes that need it
       setRouteLoading(true);
-      const timeout = setTimeout(() => setRouteLoading(false), 500);
+      // Brief delay only for critical routes to ensure smooth UX
+      const timeout = setTimeout(() => setRouteLoading(false), 100);
       return () => clearTimeout(timeout);
     } else {
       setRouteLoading(false);
@@ -105,48 +92,50 @@ const App = () => {
   if (loadingUser || routeLoading) return <Spinner />;
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       {!shouldHideNavbar && <Navbar />}
 
-      <Routes>
-        {/* Public and Patient Routes */}
-        <Route path="/" element={<Navigate to="/dashboard" />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/verify-otp" element={<VerifyOTP />} />
-        <Route path="/docverify-otp" element={<DocVerify />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/faqs" element={<FAQs />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/testimonial" element={<Testimonials />} />
-        <Route path="/doctors" element={<AllDoctor />} />
-        <Route path="/appointments" element={<PatientAppointments />} />
-        <Route path="/messages" element={<Messages />} />
-        <Route path="/messages/:docid" element={<Messages />} /> {/* Add dynamic route */}
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgetPassword />} />
-        <Route path="/change-password" element={<ChangePassword />} />
-        <Route path="/all-blogs" element={<AllBlogs />} />
-        <Route path="/blogs/:id" element={<BlogDetail />} />
-        <Route path="/terms-of-service" element={<TermsAndServices />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <main className="flex-grow">
+        <Routes>
+          {/* Public and Patient Routes */}
+          <Route path="/" element={<Navigate to="/dashboard" />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/verify-otp" element={<VerifyOTP />} />
+          <Route path="/docverify-otp" element={<DocVerify />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/testimonial" element={<Testimonials />} />
+          <Route path="/doctors" element={<AllDoctor />} />
+          <Route path="/appointments" element={<PatientAppointments />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/messages/:docid" element={<Messages />} /> {/* Add dynamic route */}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgetPassword />} />
+          <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/all-blogs" element={<AllBlogs />} />
+          <Route path="/blogs/:id" element={<BlogDetail />} />
+          <Route path="/terms-of-service" element={<TermsAndServices />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
-        {/* Doctor Routes */}
-        <Route path="/doctor-signup" element={<DoctorSignup />} />
-        <Route path="/doctor-login" element={<DoctorLogin />} />
-        <Route path="/docDashboard" element={<DocDashboard />}>
-          <Route index element={<DoctorPanel />} />
-          <Route path="appointments" element={<Appointments />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="messages" element={<DoctorChatList />} />
-          <Route path="messages/:patientId" element={<DoctorChatWindow />} />
-          <Route path="upload-blog" element={<Blogs />} />
-        </Route>
+          {/* Doctor Routes */}
+          <Route path="/doctor-signup" element={<DoctorSignup />} />
+          <Route path="/doctor-login" element={<DoctorLogin />} />
+          <Route path="/docDashboard" element={<DocDashboard />}>
+            <Route index element={<DoctorPanel />} />
+            <Route path="appointments" element={<Appointments />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="messages" element={<DoctorChatList />} />
+            <Route path="messages/:patientId" element={<DoctorChatWindow />} />
+            <Route path="upload-blog" element={<Blogs />} />
+          </Route>
 
-      </Routes>
+        </Routes>
+      </main>
 
       <Footer />
-    </>
+    </div>
   );
 };
 
