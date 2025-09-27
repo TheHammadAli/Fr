@@ -25,7 +25,7 @@ const Spinner = () => {
           height: 10px;
           margin: 0 6px;
           border-radius: 9999px;
-          background-color: #3B82F6;
+          background: linear-gradient(to right, #3b82f6, #9333ea);
           animation: dotFade 1.2s infinite ease-in-out;
         }
 
